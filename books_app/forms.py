@@ -60,9 +60,9 @@ class AuthorForm(FlaskForm):
 
 class GenreForm(FlaskForm):
     """Form to create a genre."""
-    genre_name = SelectField('Genre', choices=Genre.name.choices()) # maybe get rid of .name
-
-    submit = SubmitField('Submit')
     # TODO: Fill out the fields in this class for:
     # - the genre's name (e.g. fiction, non-fiction, etc)
     # - a submit button
+
+    genre_name = SelectField('Genre', choices=Genre.name.choices()) # maybe get rid of .name
+    submit = SubmitField('Submit')

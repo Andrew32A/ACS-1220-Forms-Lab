@@ -44,14 +44,23 @@ def create_book():
 @main.route('/create_author', methods=['GET', 'POST'])
 def create_author():
     # TODO: Make an AuthorForm instance
-    author_form = AuthorForm()
+    form = AuthorForm()
     # TODO: If the form was submitted and is valid, create a new Author object
     # and save to the database, then flash a success message to the user and
     # redirect to the homepage
+    if form.validate_on_submit():
+        author = AuthorForm(
+            author_name = form.author_name.data,
+            author_biography = form.author_biography.data,
+        )
+        db.session.add(author)
+        db.session.commit()
 
+        flash('New author was created successfully.')
+        return redirect(url_for('main.book_detail', author_id=author.id))
     # TODO: Send the form object to the template, and use it to render the form
     # fields
-    return render_template('create_author.html')
+    return render_template('create_author.html', form=form)
 
 @main.route('/create_genre', methods=['GET', 'POST'])
 def create_genre():
